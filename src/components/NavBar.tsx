@@ -14,18 +14,22 @@ export const NavBar = () => {
     <div>
       <div>
         <Link to="/">Home</Link>
-        <Link to="/login">Login</Link>
-      </div>
-      
-        <div>
-        {user && (
-            <>
-          <p>{user?.displayName}</p>
-          <img src={user?.photoURL || ""} width="100" height="100" />
-          <button onClick={logUserOut}>Log out</button>
-            </>
+        {!user ? (
+          <Link to="/login">Login</Link>
+        ) : (
+          <Link to="/createpost">Create Post</Link>
         )}
-          </div>
+      </div>
+
+      <div>
+        {user && (
+          <>
+            <p>{user?.displayName}</p>
+            <img src={user?.photoURL || ""} width="100" height="100" alt="" />
+            <button onClick={logUserOut}>Log out</button>
+          </>
+        )}
+      </div>
     </div>
   );
 };
