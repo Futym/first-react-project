@@ -4,6 +4,7 @@ import { Main } from "./pages/main/Main";
 import { Login } from "./pages/Login";
 import { NavBar } from "./components/NavBar";
 import { CreatePost } from "./pages/create-post/create-post";
+import { DetailedPost } from "./pages/post-details/detailedPost";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
           <Route path="/createpost" element={<CreatePost />} />
+          <Route path="/post/:id" element={<DetailedPost />}/>
         </Routes>
       </Router>
     </div>

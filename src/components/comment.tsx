@@ -1,10 +1,11 @@
-import { IComment } from "./post";
-import { auth, db } from "../../configs/firebase";
+import { IComment } from "./Comments";
+import { auth, db } from "../configs/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { deleteDoc, doc } from "firebase/firestore";
 
 interface Props {
   comment: IComment;
+  getComments: () => void;
 }
 
 export const Comment = (props: Props) => {
@@ -16,6 +17,7 @@ export const Comment = (props: Props) => {
     try {
       const likeToRemove = doc(db, "comments", comment.commentId);
       await deleteDoc(likeToRemove);
+      props.getComments();
     } catch (err) {
       console.log(err);
     }
@@ -25,7 +27,9 @@ export const Comment = (props: Props) => {
       <h3>{comment.username}</h3>
       <p>{comment.timestamp.toDate().toLocaleTimeString()}</p>
       <p>{comment.content}</p>
-      {userId === user?.uid && <button onClick={removeComment}>&#128465;</button>}
+      {userId === user?.uid && (
+        <button onClick={removeComment}>&#128465;</button>
+      )}
     </div>
   );
 };
